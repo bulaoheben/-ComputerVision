@@ -65,37 +65,26 @@ def RobotSpeakText(usersay="你好"):
 
 # 语音发声
 def RobotVoice(robotsay):
-    # engine = pyttsx3.init('sapi5')
-    # engine = pyttsx3.init()
-    # engine.setProperty('rate', 100)
-    # engine.setProperty('volume', 0.6)  # 音量
-    # engine.say(robotsay)
-    # print(111)
-    # engine.runAndWait()
-
-    # tts = pyttsx3.Engine()
-    # tts = pyttsx3.init()
-    # voices = tts.getProperty('voices')
-    # for voice in voices:
-    #     print('id = {} \n name = {} \n'.format(voice.id, voice.name))
-    pythoncom.CoInitialize()
-    engine = client.Dispatch("SAPI.SpVoice")
-    engine.Speak(robotsay)
+    engine = pyttsx3.init()
+    engine.setProperty('rate', 180)
+    engine.setProperty('volume', 0.6)  # 音量
+    engine.say(robotsay)
+    engine.runAndWait()
 
 
 # 主函数
 def main():
     while True:
         # try:
-        #     SaveVoice()
-        #     result = client.asr(get_file_content('T.wav'), 'wav', 16000, {'dev_pid': 1536})  # 识别本地文件
-        #     usersay = result['result'][0]
-        #     print(usersay)
-        #     robotsay = RobotSpeakText(usersay)
-        #     print('小嘟嘟说：')
-        #     print(robotsay)
-        #     if robotsay is None:
-            robotsay = "我没听清，你在说一遍"
+            SaveVoice()
+            result = client1.asr(get_file_content('T.wav'), 'wav', 16000, {'dev_pid': 1536})  # 识别本地文件
+            usersay = result['result'][0]
+            print(usersay)
+            robotsay = RobotSpeakText(usersay)
+            print('小嘟嘟说：')
+            print(robotsay)
+            if robotsay is None:
+                robotsay = "我没听清，你在说一遍"
             RobotVoice(robotsay)
         # except Exception as e:  # 异常处理
         #     print("出现异常", e)
